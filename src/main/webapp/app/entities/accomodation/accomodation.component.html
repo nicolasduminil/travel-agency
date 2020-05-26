@@ -37,8 +37,8 @@
                     <td jhiTranslate="{{ 'travelAgencyApp.AccomodationType.' + accomodation.accomodationType }}">{{ accomodation.accomodationType }}</td>
                     <td jhiTranslate="{{ 'travelAgencyApp.AccomodationClass.' + accomodation.accomodationClass }}">{{ accomodation.accomodationClass }}</td>
                     <td>
-                        <div *ngIf="accomodation.location">
-                            <a [routerLink]="['/location', accomodation.location?.id, 'view']" >{{ accomodation.location?.id }}</a>
+                        <div *ngIf="accomodation.locationId">
+                            <a [routerLink]="['/location', accomodation.locationId , 'view']" >{{ accomodation.locationId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

@@ -4,17 +4,13 @@
     {
       "fieldName": "activityDescription",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "activityType",
       "fieldType": "ActivityType",
       "fieldValues": "ADVENTURE,ATTRACTION,BOAT,GAME,HIKING,HORSE_RIDE,MUSEUM,RECREATIONAL,ROAD_TRIP,SELF_GUIDED,SWIMMING,WALKING_TOUR",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -43,9 +39,9 @@
   ],
   "changelogDate": "20200526124234",
   "entityTableName": "activity",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "no",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

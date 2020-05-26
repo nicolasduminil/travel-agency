@@ -43,9 +43,9 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.customer.deal" for="field_deal">Deal</label>
-                    <select class="form-control" id="field_deal" name="deal" formControlName="deal">
+                    <select class="form-control" id="field_deal" name="deal" formControlName="dealId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="dealOption.id === editForm.get('deal')!.value?.id ? editForm.get('deal')!.value : dealOption" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                        <option [ngValue]="dealOption.id" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
                     </select>
                 </div>
             </div>

@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Location;
 import fr.simplex_software.travel_agency.repository.LocationRepository;
+import fr.simplex_software.travel_agency.service.LocationService;
+import fr.simplex_software.travel_agency.service.dto.LocationDTO;
+import fr.simplex_software.travel_agency.service.mapper.LocationMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,6 +52,12 @@ public class LocationResourceIT {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    @Autowired
+    private LocationMapper locationMapper;
+
+    @Autowired
+    private LocationService locationService;
 
     @Autowired
     private EntityManager em;
@@ -101,9 +110,10 @@ public class LocationResourceIT {
     public void createLocation() throws Exception {
         int databaseSizeBeforeCreate = locationRepository.findAll().size();
         // Create the Location
+        LocationDTO locationDTO = locationMapper.toDto(location);
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Location in the database
@@ -125,11 +135,12 @@ public class LocationResourceIT {
 
         // Create the Location with an existing ID
         location.setId(1L);
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Location in the database
@@ -146,11 +157,12 @@ public class LocationResourceIT {
         location.setStreetAddress(null);
 
         // Create the Location, which fails.
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
 
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Location> locationList = locationRepository.findAll();
@@ -165,11 +177,12 @@ public class LocationResourceIT {
         location.setStreetNumber(null);
 
         // Create the Location, which fails.
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
 
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Location> locationList = locationRepository.findAll();
@@ -184,11 +197,12 @@ public class LocationResourceIT {
         location.setPostalCode(null);
 
         // Create the Location, which fails.
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
 
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Location> locationList = locationRepository.findAll();
@@ -203,11 +217,12 @@ public class LocationResourceIT {
         location.setCity(null);
 
         // Create the Location, which fails.
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
 
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Location> locationList = locationRepository.findAll();
@@ -222,11 +237,12 @@ public class LocationResourceIT {
         location.setStateProvince(null);
 
         // Create the Location, which fails.
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
 
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Location> locationList = locationRepository.findAll();
@@ -241,11 +257,12 @@ public class LocationResourceIT {
         location.setCountryName(null);
 
         // Create the Location, which fails.
+        LocationDTO locationDTO = locationMapper.toDto(location);
 
 
         restLocationMockMvc.perform(post("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Location> locationList = locationRepository.findAll();
@@ -316,10 +333,11 @@ public class LocationResourceIT {
             .city(UPDATED_CITY)
             .stateProvince(UPDATED_STATE_PROVINCE)
             .countryName(UPDATED_COUNTRY_NAME);
+        LocationDTO locationDTO = locationMapper.toDto(updatedLocation);
 
         restLocationMockMvc.perform(put("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedLocation)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isOk());
 
         // Validate the Location in the database
@@ -339,10 +357,13 @@ public class LocationResourceIT {
     public void updateNonExistingLocation() throws Exception {
         int databaseSizeBeforeUpdate = locationRepository.findAll().size();
 
+        // Create the Location
+        LocationDTO locationDTO = locationMapper.toDto(location);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLocationMockMvc.perform(put("/api/locations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(location)))
+            .content(TestUtil.convertObjectToJsonBytes(locationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Location in the database

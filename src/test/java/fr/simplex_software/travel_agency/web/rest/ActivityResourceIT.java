@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Activity;
 import fr.simplex_software.travel_agency.repository.ActivityRepository;
+import fr.simplex_software.travel_agency.service.ActivityService;
+import fr.simplex_software.travel_agency.service.dto.ActivityDTO;
+import fr.simplex_software.travel_agency.service.mapper.ActivityMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +41,12 @@ public class ActivityResourceIT {
 
     @Autowired
     private ActivityRepository activityRepository;
+
+    @Autowired
+    private ActivityMapper activityMapper;
+
+    @Autowired
+    private ActivityService activityService;
 
     @Autowired
     private EntityManager em;
@@ -82,9 +91,10 @@ public class ActivityResourceIT {
     public void createActivity() throws Exception {
         int databaseSizeBeforeCreate = activityRepository.findAll().size();
         // Create the Activity
+        ActivityDTO activityDTO = activityMapper.toDto(activity);
         restActivityMockMvc.perform(post("/api/activities")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(activity)))
+            .content(TestUtil.convertObjectToJsonBytes(activityDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Activity in the database
@@ -102,11 +112,12 @@ public class ActivityResourceIT {
 
         // Create the Activity with an existing ID
         activity.setId(1L);
+        ActivityDTO activityDTO = activityMapper.toDto(activity);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restActivityMockMvc.perform(post("/api/activities")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(activity)))
+            .content(TestUtil.convertObjectToJsonBytes(activityDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Activity in the database
@@ -123,11 +134,12 @@ public class ActivityResourceIT {
         activity.setActivityDescription(null);
 
         // Create the Activity, which fails.
+        ActivityDTO activityDTO = activityMapper.toDto(activity);
 
 
         restActivityMockMvc.perform(post("/api/activities")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(activity)))
+            .content(TestUtil.convertObjectToJsonBytes(activityDTO)))
             .andExpect(status().isBadRequest());
 
         List<Activity> activityList = activityRepository.findAll();
@@ -142,11 +154,12 @@ public class ActivityResourceIT {
         activity.setActivityType(null);
 
         // Create the Activity, which fails.
+        ActivityDTO activityDTO = activityMapper.toDto(activity);
 
 
         restActivityMockMvc.perform(post("/api/activities")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(activity)))
+            .content(TestUtil.convertObjectToJsonBytes(activityDTO)))
             .andExpect(status().isBadRequest());
 
         List<Activity> activityList = activityRepository.findAll();
@@ -205,10 +218,11 @@ public class ActivityResourceIT {
         updatedActivity
             .activityDescription(UPDATED_ACTIVITY_DESCRIPTION)
             .activityType(UPDATED_ACTIVITY_TYPE);
+        ActivityDTO activityDTO = activityMapper.toDto(updatedActivity);
 
         restActivityMockMvc.perform(put("/api/activities")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedActivity)))
+            .content(TestUtil.convertObjectToJsonBytes(activityDTO)))
             .andExpect(status().isOk());
 
         // Validate the Activity in the database
@@ -224,10 +238,13 @@ public class ActivityResourceIT {
     public void updateNonExistingActivity() throws Exception {
         int databaseSizeBeforeUpdate = activityRepository.findAll().size();
 
+        // Create the Activity
+        ActivityDTO activityDTO = activityMapper.toDto(activity);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restActivityMockMvc.perform(put("/api/activities")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(activity)))
+            .content(TestUtil.convertObjectToJsonBytes(activityDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Activity in the database

@@ -37,8 +37,8 @@
                     <td jhiTranslate="{{ 'travelAgencyApp.Gender.' + customer.customerGender }}">{{ customer.customerGender }}</td>
                     <td>{{ customer.customerBirthDate | date:'mediumDate' }}</td>
                     <td>
-                        <div *ngIf="customer.deal">
-                            <a [routerLink]="['/deal', customer.deal?.id, 'view']" >{{ customer.deal?.id }}</a>
+                        <div *ngIf="customer.dealId">
+                            <a [routerLink]="['/deal', customer.dealId , 'view']" >{{ customer.dealId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

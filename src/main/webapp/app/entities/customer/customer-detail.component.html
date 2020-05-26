@@ -22,8 +22,8 @@
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.customer.deal">Deal</span></dt>
                 <dd>
-                    <div *ngIf="customer.deal">
-                        <a [routerLink]="['/deal', customer.deal?.id, 'view']">{{ customer.deal?.id }}</a>
+                    <div *ngIf="customer.dealId">
+                        <a [routerLink]="['/deal', customer.dealId, 'view']">{{ customer.dealId }}</a>
                     </div>
                 </dd>
             </dl>

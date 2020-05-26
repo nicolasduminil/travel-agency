@@ -53,17 +53,17 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.transport.to" for="field_to">To</label>
-                    <select class="form-control" id="field_to" name="to" formControlName="to">
+                    <select class="form-control" id="field_to" name="to" formControlName="toId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="locationOption.id === editForm.get('to')!.value?.id ? editForm.get('to')!.value : locationOption" *ngFor="let locationOption of tos; trackBy: trackById">{{ locationOption.id }}</option>
+                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of tos; trackBy: trackById">{{ locationOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.transport.from" for="field_from">From</label>
-                    <select class="form-control" id="field_from" name="from" formControlName="from">
+                    <select class="form-control" id="field_from" name="from" formControlName="fromId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="locationOption.id === editForm.get('from')!.value?.id ? editForm.get('from')!.value : locationOption" *ngFor="let locationOption of froms; trackBy: trackById">{{ locationOption.id }}</option>
+                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of froms; trackBy: trackById">{{ locationOption.id }}</option>
                     </select>
                 </div>
 

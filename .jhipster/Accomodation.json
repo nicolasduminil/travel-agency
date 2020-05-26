@@ -4,25 +4,19 @@
     {
       "fieldName": "accomodationName",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "accomodationType",
       "fieldType": "AccomodationType",
       "fieldValues": "HOTEL,APPARTMENT,TIMESHARE,BED_AND_BREAKFAST,HOSTEL,CAMPING",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "accomodationClass",
       "fieldType": "AccomodationClass",
       "fieldValues": "FIRST,BUSINESS,PREMIUM,ECONOMY",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -45,9 +39,9 @@
   ],
   "changelogDate": "20200526124134",
   "entityTableName": "accomodation",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "no",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

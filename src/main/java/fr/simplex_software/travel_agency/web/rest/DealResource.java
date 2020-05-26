@@ -1,8 +1,8 @@
 package fr.simplex_software.travel_agency.web.rest;
 
-import fr.simplex_software.travel_agency.domain.Deal;
-import fr.simplex_software.travel_agency.repository.DealRepository;
+import fr.simplex_software.travel_agency.service.DealService;
 import fr.simplex_software.travel_agency.web.rest.errors.BadRequestAlertException;
+import fr.simplex_software.travel_agency.service.dto.DealDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +23,6 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
-@Transactional
 public class DealResource {
 
     private final Logger log = LoggerFactory.getLogger(DealResource.class);
@@ -34,26 +32,26 @@ public class DealResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final DealRepository dealRepository;
+    private final DealService dealService;
 
-    public DealResource(DealRepository dealRepository) {
-        this.dealRepository = dealRepository;
+    public DealResource(DealService dealService) {
+        this.dealService = dealService;
     }
 
     /**
      * {@code POST  /deals} : Create a new deal.
      *
-     * @param deal the deal to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new deal, or with status {@code 400 (Bad Request)} if the deal has already an ID.
+     * @param dealDTO the dealDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new dealDTO, or with status {@code 400 (Bad Request)} if the deal has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/deals")
-    public ResponseEntity<Deal> createDeal(@Valid @RequestBody Deal deal) throws URISyntaxException {
-        log.debug("REST request to save Deal : {}", deal);
-        if (deal.getId() != null) {
+    public ResponseEntity<DealDTO> createDeal(@Valid @RequestBody DealDTO dealDTO) throws URISyntaxException {
+        log.debug("REST request to save Deal : {}", dealDTO);
+        if (dealDTO.getId() != null) {
             throw new BadRequestAlertException("A new deal cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Deal result = dealRepository.save(deal);
+        DealDTO result = dealService.save(dealDTO);
         return ResponseEntity.created(new URI("/api/deals/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -62,21 +60,21 @@ public class DealResource {
     /**
      * {@code PUT  /deals} : Updates an existing deal.
      *
-     * @param deal the deal to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated deal,
-     * or with status {@code 400 (Bad Request)} if the deal is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the deal couldn't be updated.
+     * @param dealDTO the dealDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated dealDTO,
+     * or with status {@code 400 (Bad Request)} if the dealDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the dealDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/deals")
-    public ResponseEntity<Deal> updateDeal(@Valid @RequestBody Deal deal) throws URISyntaxException {
-        log.debug("REST request to update Deal : {}", deal);
-        if (deal.getId() == null) {
+    public ResponseEntity<DealDTO> updateDeal(@Valid @RequestBody DealDTO dealDTO) throws URISyntaxException {
+        log.debug("REST request to update Deal : {}", dealDTO);
+        if (dealDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Deal result = dealRepository.save(deal);
+        DealDTO result = dealService.save(dealDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, deal.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dealDTO.getId().toString()))
             .body(result);
     }
 
@@ -86,35 +84,35 @@ public class DealResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of deals in body.
      */
     @GetMapping("/deals")
-    public List<Deal> getAllDeals() {
+    public List<DealDTO> getAllDeals() {
         log.debug("REST request to get all Deals");
-        return dealRepository.findAll();
+        return dealService.findAll();
     }
 
     /**
      * {@code GET  /deals/:id} : get the "id" deal.
      *
-     * @param id the id of the deal to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the deal, or with status {@code 404 (Not Found)}.
+     * @param id the id of the dealDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the dealDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/deals/{id}")
-    public ResponseEntity<Deal> getDeal(@PathVariable Long id) {
+    public ResponseEntity<DealDTO> getDeal(@PathVariable Long id) {
         log.debug("REST request to get Deal : {}", id);
-        Optional<Deal> deal = dealRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(deal);
+        Optional<DealDTO> dealDTO = dealService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(dealDTO);
     }
 
     /**
      * {@code DELETE  /deals/:id} : delete the "id" deal.
      *
-     * @param id the id of the deal to delete.
+     * @param id the id of the dealDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/deals/{id}")
     public ResponseEntity<Void> deleteDeal(@PathVariable Long id) {
         log.debug("REST request to delete Deal : {}", id);
 
-        dealRepository.deleteById(id);
+        dealService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

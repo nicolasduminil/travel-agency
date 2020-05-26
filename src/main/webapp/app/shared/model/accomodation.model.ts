@@ -1,4 +1,3 @@
-import { ILocation } from 'app/shared/model/location.model';
 import { IService } from 'app/shared/model/service.model';
 import { AccomodationType } from 'app/shared/model/enumerations/accomodation-type.model';
 import { AccomodationClass } from 'app/shared/model/enumerations/accomodation-class.model';
@@ -8,7 +7,7 @@ export interface IAccomodation {
   accomodationName?: string;
   accomodationType?: AccomodationType;
   accomodationClass?: AccomodationClass;
-  location?: ILocation;
+  locationId?: number;
   services?: IService[];
 }
 
@@ -18,7 +17,7 @@ export class Accomodation implements IAccomodation {
     public accomodationName?: string,
     public accomodationType?: AccomodationType,
     public accomodationClass?: AccomodationClass,
-    public location?: ILocation,
+    public locationId?: number,
     public services?: IService[]
   ) {}
 }

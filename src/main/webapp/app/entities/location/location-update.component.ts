@@ -26,7 +26,7 @@ export class LocationUpdateComponent implements OnInit {
     city: [null, [Validators.required]],
     stateProvince: [null, [Validators.required]],
     countryName: [null, [Validators.required]],
-    customer: [],
+    customerId: [],
   });
 
   constructor(
@@ -53,7 +53,7 @@ export class LocationUpdateComponent implements OnInit {
       city: location.city,
       stateProvince: location.stateProvince,
       countryName: location.countryName,
-      customer: location.customer,
+      customerId: location.customerId,
     });
   }
 
@@ -81,7 +81,7 @@ export class LocationUpdateComponent implements OnInit {
       city: this.editForm.get(['city'])!.value,
       stateProvince: this.editForm.get(['stateProvince'])!.value,
       countryName: this.editForm.get(['countryName'])!.value,
-      customer: this.editForm.get(['customer'])!.value,
+      customerId: this.editForm.get(['customerId'])!.value,
     };
   }
 

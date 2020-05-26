@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Contact;
 import fr.simplex_software.travel_agency.repository.ContactRepository;
+import fr.simplex_software.travel_agency.service.ContactService;
+import fr.simplex_software.travel_agency.service.dto.ContactDTO;
+import fr.simplex_software.travel_agency.service.mapper.ContactMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,6 +64,12 @@ public class ContactResourceIT {
     private ContactRepository contactRepository;
 
     @Autowired
+    private ContactMapper contactMapper;
+
+    @Autowired
+    private ContactService contactService;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -117,9 +126,10 @@ public class ContactResourceIT {
     public void createContact() throws Exception {
         int databaseSizeBeforeCreate = contactRepository.findAll().size();
         // Create the Contact
+        ContactDTO contactDTO = contactMapper.toDto(contact);
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Contact in the database
@@ -144,11 +154,12 @@ public class ContactResourceIT {
 
         // Create the Contact with an existing ID
         contact.setId(1L);
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Contact in the database
@@ -165,11 +176,12 @@ public class ContactResourceIT {
         contact.setContactName(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -184,11 +196,12 @@ public class ContactResourceIT {
         contact.setContactFirstName(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -203,11 +216,12 @@ public class ContactResourceIT {
         contact.setContactLastName(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -222,11 +236,12 @@ public class ContactResourceIT {
         contact.setContactEmailAddress(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -241,11 +256,12 @@ public class ContactResourceIT {
         contact.setContactWebSite(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -260,11 +276,12 @@ public class ContactResourceIT {
         contact.setContactSalutation(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -279,11 +296,12 @@ public class ContactResourceIT {
         contact.setContactJobTitle(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -298,11 +316,12 @@ public class ContactResourceIT {
         contact.setContactPhoneNumber(null);
 
         // Create the Contact, which fails.
+        ContactDTO contactDTO = contactMapper.toDto(contact);
 
 
         restContactMockMvc.perform(post("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contact> contactList = contactRepository.findAll();
@@ -382,10 +401,11 @@ public class ContactResourceIT {
             .contactJobTitle(UPDATED_CONTACT_JOB_TITLE)
             .contactPhoneNumber(UPDATED_CONTACT_PHONE_NUMBER)
             .contactFaxNumber(UPDATED_CONTACT_FAX_NUMBER);
+        ContactDTO contactDTO = contactMapper.toDto(updatedContact);
 
         restContactMockMvc.perform(put("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedContact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isOk());
 
         // Validate the Contact in the database
@@ -408,10 +428,13 @@ public class ContactResourceIT {
     public void updateNonExistingContact() throws Exception {
         int databaseSizeBeforeUpdate = contactRepository.findAll().size();
 
+        // Create the Contact
+        ContactDTO contactDTO = contactMapper.toDto(contact);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContactMockMvc.perform(put("/api/contacts")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(contact)))
+            .content(TestUtil.convertObjectToJsonBytes(contactDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Contact in the database

@@ -46,26 +46,26 @@
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.contact.address">Address</span></dt>
                 <dd>
-                    <div *ngIf="contact.address">
-                        <a [routerLink]="['/location', contact.address?.id, 'view']">{{ contact.address?.id }}</a>
+                    <div *ngIf="contact.addressId">
+                        <a [routerLink]="['/location', contact.addressId, 'view']">{{ contact.addressId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.contact.activity">Activity</span></dt>
                 <dd>
-                    <div *ngIf="contact.activity">
-                        <a [routerLink]="['/activity', contact.activity?.id, 'view']">{{ contact.activity?.id }}</a>
+                    <div *ngIf="contact.activityId">
+                        <a [routerLink]="['/activity', contact.activityId, 'view']">{{ contact.activityId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.contact.customer">Customer</span></dt>
                 <dd>
-                    <div *ngIf="contact.customer">
-                        <a [routerLink]="['/customer', contact.customer?.id, 'view']">{{ contact.customer?.id }}</a>
+                    <div *ngIf="contact.customerId">
+                        <a [routerLink]="['/customer', contact.customerId, 'view']">{{ contact.customerId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.contact.deal">Deal</span></dt>
                 <dd>
-                    <div *ngIf="contact.deal">
-                        <a [routerLink]="['/deal', contact.deal?.id, 'view']">{{ contact.deal?.id }}</a>
+                    <div *ngIf="contact.dealId">
+                        <a [routerLink]="['/deal', contact.dealId, 'view']">{{ contact.dealId }}</a>
                     </div>
                 </dd>
             </dl>

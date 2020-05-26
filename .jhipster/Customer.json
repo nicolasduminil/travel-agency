@@ -4,9 +4,7 @@
     {
       "fieldName": "customerName",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "customerGender",
@@ -41,9 +39,9 @@
   ],
   "changelogDate": "20200526124434",
   "entityTableName": "customer",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "no",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

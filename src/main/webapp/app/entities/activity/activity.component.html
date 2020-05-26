@@ -35,8 +35,8 @@
                     <td>{{ activity.activityDescription }}</td>
                     <td jhiTranslate="{{ 'travelAgencyApp.ActivityType.' + activity.activityType }}">{{ activity.activityType }}</td>
                     <td>
-                        <div *ngIf="activity.location">
-                            <a [routerLink]="['/location', activity.location?.id, 'view']" >{{ activity.location?.id }}</a>
+                        <div *ngIf="activity.locationId">
+                            <a [routerLink]="['/location', activity.locationId , 'view']" >{{ activity.locationId }}</a>
                         </div>
                     </td>
                     <td class="text-right">
