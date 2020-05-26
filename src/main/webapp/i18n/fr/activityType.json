@@ -1,0 +1,19 @@
+{
+  "travelAgencyApp": {
+    "ActivityType": {
+      "null": "",
+      "ADVENTURE": "ADVENTURE",
+      "ATTRACTION": "ATTRACTION",
+      "BOAT": "BOAT",
+      "GAME": "GAME",
+      "HIKING": "HIKING",
+      "HORSE_RIDE": "HORSE_RIDE",
+      "MUSEUM": "MUSEUM",
+      "RECREATIONAL": "RECREATIONAL",
+      "ROAD_TRIP": "ROAD_TRIP",
+      "SELF_GUIDED": "SELF_GUIDED",
+      "SWIMMING": "SWIMMING",
+      "WALKING_TOUR": "WALKING_TOUR"
+    }
+  }
+}

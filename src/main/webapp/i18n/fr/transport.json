@@ -1,0 +1,27 @@
+{
+  "travelAgencyApp": {
+    "transport": {
+      "home": {
+        "title": "Transports",
+        "createLabel": "Créer un nouveau Transport",
+        "createOrEditLabel": "Créer ou éditer un Transport",
+        "notFound": "Aucun Transport trouvé"
+      },
+      "created": "Un nouveau Transport a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Transport avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Transport avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Transport {{ id }} ?"
+      },
+      "detail": {
+        "title": "Transport"
+      },
+      "transportType": "Transport Type",
+      "transportName": "Transport Name",
+      "transportDescription": "Transport Description",
+      "to": "To",
+      "from": "From",
+      "service": "Service"
+    }
+  }
+}

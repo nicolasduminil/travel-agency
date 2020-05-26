@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contact">
+            <h2><span jhiTranslate="travelAgencyApp.contact.detail.title">Contact</span> {{ contact.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactName">Contact Name</span></dt>
+                <dd>
+                    <span>{{ contact.contactName }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactFirstName">Contact First Name</span></dt>
+                <dd>
+                    <span>{{ contact.contactFirstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactLastName">Contact Last Name</span></dt>
+                <dd>
+                    <span>{{ contact.contactLastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactEmailAddress">Contact Email Address</span></dt>
+                <dd>
+                    <span>{{ contact.contactEmailAddress }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactWebSite">Contact Web Site</span></dt>
+                <dd>
+                    <span>{{ contact.contactWebSite }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactSalutation">Contact Salutation</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'travelAgencyApp.Salutation.' + contact.contactSalutation }}">{{ contact.contactSalutation }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactJobTitle">Contact Job Title</span></dt>
+                <dd>
+                    <span>{{ contact.contactJobTitle }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactPhoneNumber">Contact Phone Number</span></dt>
+                <dd>
+                    <span>{{ contact.contactPhoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.contactFaxNumber">Contact Fax Number</span></dt>
+                <dd>
+                    <span>{{ contact.contactFaxNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.address">Address</span></dt>
+                <dd>
+                    <div *ngIf="contact.address">
+                        <a [routerLink]="['/location', contact.address?.id, 'view']">{{ contact.address?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.activity">Activity</span></dt>
+                <dd>
+                    <div *ngIf="contact.activity">
+                        <a [routerLink]="['/activity', contact.activity?.id, 'view']">{{ contact.activity?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="contact.customer">
+                        <a [routerLink]="['/customer', contact.customer?.id, 'view']">{{ contact.customer?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.contact.deal">Deal</span></dt>
+                <dd>
+                    <div *ngIf="contact.deal">
+                        <a [routerLink]="['/deal', contact.deal?.id, 'view']">{{ contact.deal?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contact', contact.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

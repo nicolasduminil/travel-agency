@@ -1,0 +1,9 @@
+{
+  "travelAgencyApp": {
+    "Gender": {
+      "null": "",
+      "M": "M",
+      "F": "F"
+    }
+  }
+}

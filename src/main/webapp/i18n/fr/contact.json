@@ -1,0 +1,34 @@
+{
+  "travelAgencyApp": {
+    "contact": {
+      "home": {
+        "title": "Contacts",
+        "createLabel": "Créer un nouveau Contact",
+        "createOrEditLabel": "Créer ou éditer un Contact",
+        "notFound": "Aucun Contact trouvé"
+      },
+      "created": "Un nouveau Contact a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Contact avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Contact avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Contact {{ id }} ?"
+      },
+      "detail": {
+        "title": "Contact"
+      },
+      "contactName": "Contact Name",
+      "contactFirstName": "Contact First Name",
+      "contactLastName": "Contact Last Name",
+      "contactEmailAddress": "Contact Email Address",
+      "contactWebSite": "Contact Web Site",
+      "contactSalutation": "Contact Salutation",
+      "contactJobTitle": "Contact Job Title",
+      "contactPhoneNumber": "Contact Phone Number",
+      "contactFaxNumber": "Contact Fax Number",
+      "address": "Address",
+      "activity": "Activity",
+      "customer": "Customer",
+      "deal": "Deal"
+    }
+  }
+}

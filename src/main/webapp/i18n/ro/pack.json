@@ -1,0 +1,26 @@
+{
+  "travelAgencyApp": {
+    "pack": {
+      "home": {
+        "title": "Packs",
+        "createLabel": "Creeare o nouă entitate Pack",
+        "createOrEditLabel": "Creeare sau editare Pack",
+        "notFound": "No Packs found"
+      },
+      "created": "A fost creată o nouă entitate Pack cu identificatorul {{ param }}",
+      "updated": "Pack cu identificatorul {{ param }} a fost actualizată",
+      "deleted": "Pack cu identificatorul {{ param }} a fost ștearsă",
+      "delete": {
+        "question": "Sunteți sigur că doriți să ștergeți Pack {{ id }}?"
+      },
+      "detail": {
+        "title": "Pack"
+      },
+      "packageName": "Package Name",
+      "packageDescription": "Package Description",
+      "packageDiscount": "Package Discount",
+      "packagePrice": "Package Price",
+      "services": "Services"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Accomodation",
+  "fields": [
+    {
+      "fieldName": "accomodationName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "accomodationType",
+      "fieldType": "AccomodationType",
+      "fieldValues": "HOTEL,APPARTMENT,TIMESHARE,BED_AND_BREAKFAST,HOSTEL,CAMPING",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "accomodationClass",
+      "fieldType": "AccomodationClass",
+      "fieldValues": "FIRST,BUSINESS,PREMIUM,ECONOMY",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "accomodation",
+      "relationshipName": "location",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "service",
+      "otherEntityRelationshipName": "accomodations",
+      "relationshipName": "services",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200526124134",
+  "entityTableName": "accomodation",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

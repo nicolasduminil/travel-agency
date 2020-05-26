@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accomodation">
+            <h2><span jhiTranslate="travelAgencyApp.accomodation.detail.title">Accomodation</span> {{ accomodation.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="travelAgencyApp.accomodation.accomodationName">Accomodation Name</span></dt>
+                <dd>
+                    <span>{{ accomodation.accomodationName }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.accomodation.accomodationType">Accomodation Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'travelAgencyApp.AccomodationType.' + accomodation.accomodationType }}">{{ accomodation.accomodationType }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.accomodation.accomodationClass">Accomodation Class</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'travelAgencyApp.AccomodationClass.' + accomodation.accomodationClass }}">{{ accomodation.accomodationClass }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.accomodation.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="accomodation.location">
+                        <a [routerLink]="['/location', accomodation.location?.id, 'view']">{{ accomodation.location?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/accomodation', accomodation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

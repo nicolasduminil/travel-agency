@@ -1,0 +1,11 @@
+{
+  "travelAgencyApp": {
+    "AccomodationClass": {
+      "null": "",
+      "FIRST": "FIRST",
+      "BUSINESS": "BUSINESS",
+      "PREMIUM": "PREMIUM",
+      "ECONOMY": "ECONOMY"
+    }
+  }
+}

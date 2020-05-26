@@ -1,0 +1,30 @@
+{
+  "travelAgencyApp": {
+    "service": {
+      "home": {
+        "title": "Services",
+        "createLabel": "Créer un nouveau Service",
+        "createOrEditLabel": "Créer ou éditer un Service",
+        "notFound": "Aucun Service trouvé"
+      },
+      "created": "Un nouveau Service a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Service avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Service avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Service {{ id }} ?"
+      },
+      "detail": {
+        "title": "Service"
+      },
+      "serviceDescription": "Service Description",
+      "serviceStartDate": "Service Start Date",
+      "serviceEndDate": "Service End Date",
+      "servicePrice": "Service Price",
+      "deals": "Deals",
+      "packages": "Packages",
+      "accomodations": "Accomodations",
+      "activities": "Activities",
+      "transport": "Transport"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "travelAgencyApp": {
+    "location": {
+      "home": {
+        "title": "Locations",
+        "createLabel": "Créer un nouveau Location",
+        "createOrEditLabel": "Créer ou éditer un Location",
+        "notFound": "Aucun Location trouvé"
+      },
+      "created": "Un nouveau Location a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Location avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Location avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Location {{ id }} ?"
+      },
+      "detail": {
+        "title": "Location"
+      },
+      "streetAddress": "Street Address",
+      "streetNumber": "Street Number",
+      "postalCode": "Postal Code",
+      "city": "City",
+      "stateProvince": "State Province",
+      "countryName": "Country Name",
+      "accomodation": "Accomodation",
+      "contact": "Contact",
+      "activity": "Activity",
+      "transport": "Transport",
+      "transport": "Transport",
+      "customer": "Customer"
+    }
+  }
+}

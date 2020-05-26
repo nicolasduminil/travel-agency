@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-activity-heading" jhiTranslate="travelAgencyApp.activity.home.createOrEditLabel">Create or edit a Activity</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.activity.activityDescription" for="field_activityDescription">Activity Description</label>
+                    <input type="text" class="form-control" name="activityDescription" id="field_activityDescription"
+                           formControlName="activityDescription"/>
+                    <div *ngIf="editForm.get('activityDescription')!.invalid && (editForm.get('activityDescription')!.dirty || editForm.get('activityDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('activityDescription')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.activity.activityType" for="field_activityType">Activity Type</label>
+                    <select class="form-control" name="activityType" formControlName="activityType" id="field_activityType">
+                        <option value="ADVENTURE">{{ 'travelAgencyApp.ActivityType.ADVENTURE' | translate }}</option>
+                        <option value="ATTRACTION">{{ 'travelAgencyApp.ActivityType.ATTRACTION' | translate }}</option>
+                        <option value="BOAT">{{ 'travelAgencyApp.ActivityType.BOAT' | translate }}</option>
+                        <option value="GAME">{{ 'travelAgencyApp.ActivityType.GAME' | translate }}</option>
+                        <option value="HIKING">{{ 'travelAgencyApp.ActivityType.HIKING' | translate }}</option>
+                        <option value="HORSE_RIDE">{{ 'travelAgencyApp.ActivityType.HORSE_RIDE' | translate }}</option>
+                        <option value="MUSEUM">{{ 'travelAgencyApp.ActivityType.MUSEUM' | translate }}</option>
+                        <option value="RECREATIONAL">{{ 'travelAgencyApp.ActivityType.RECREATIONAL' | translate }}</option>
+                        <option value="ROAD_TRIP">{{ 'travelAgencyApp.ActivityType.ROAD_TRIP' | translate }}</option>
+                        <option value="SELF_GUIDED">{{ 'travelAgencyApp.ActivityType.SELF_GUIDED' | translate }}</option>
+                        <option value="SWIMMING">{{ 'travelAgencyApp.ActivityType.SWIMMING' | translate }}</option>
+                        <option value="WALKING_TOUR">{{ 'travelAgencyApp.ActivityType.WALKING_TOUR' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('activityType')!.invalid && (editForm.get('activityType')!.dirty || editForm.get('activityType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('activityType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.activity.location" for="field_location">Location</label>
+                    <select class="form-control" id="field_location" name="location" formControlName="location">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id === editForm.get('location')!.value?.id ? editForm.get('location')!.value : locationOption" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "travelAgencyApp": {
+    "transport": {
+      "home": {
+        "title": "Transports",
+        "createLabel": "Creeare o nouă entitate Transport",
+        "createOrEditLabel": "Creeare sau editare Transport",
+        "notFound": "No Transports found"
+      },
+      "created": "A fost creată o nouă entitate Transport cu identificatorul {{ param }}",
+      "updated": "Transport cu identificatorul {{ param }} a fost actualizată",
+      "deleted": "Transport cu identificatorul {{ param }} a fost ștearsă",
+      "delete": {
+        "question": "Sunteți sigur că doriți să ștergeți Transport {{ id }}?"
+      },
+      "detail": {
+        "title": "Transport"
+      },
+      "transportType": "Transport Type",
+      "transportName": "Transport Name",
+      "transportDescription": "Transport Description",
+      "to": "To",
+      "from": "From",
+      "service": "Service"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "travelAgencyApp": {
+    "accomodation": {
+      "home": {
+        "title": "Accomodations",
+        "createLabel": "Create a new Accomodation",
+        "createOrEditLabel": "Create or edit a Accomodation",
+        "notFound": "No Accomodations found"
+      },
+      "created": "A new Accomodation is created with identifier {{ param }}",
+      "updated": "A Accomodation is updated with identifier {{ param }}",
+      "deleted": "A Accomodation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Accomodation {{ id }}?"
+      },
+      "detail": {
+        "title": "Accomodation"
+      },
+      "accomodationName": "Accomodation Name",
+      "accomodationType": "Accomodation Type",
+      "accomodationClass": "Accomodation Class",
+      "location": "Location",
+      "services": "Services"
+    }
+  }
+}

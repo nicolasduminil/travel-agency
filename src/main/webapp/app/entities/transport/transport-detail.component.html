@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="transport">
+            <h2><span jhiTranslate="travelAgencyApp.transport.detail.title">Transport</span> {{ transport.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="travelAgencyApp.transport.transportType">Transport Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'travelAgencyApp.TransportType.' + transport.transportType }}">{{ transport.transportType }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.transport.transportName">Transport Name</span></dt>
+                <dd>
+                    <span>{{ transport.transportName }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.transport.transportDescription">Transport Description</span></dt>
+                <dd>
+                    <span>{{ transport.transportDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.transport.to">To</span></dt>
+                <dd>
+                    <div *ngIf="transport.to">
+                        <a [routerLink]="['/location', transport.to?.id, 'view']">{{ transport.to?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.transport.from">From</span></dt>
+                <dd>
+                    <div *ngIf="transport.from">
+                        <a [routerLink]="['/location', transport.from?.id, 'view']">{{ transport.from?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.transport.service">Service</span></dt>
+                <dd>
+                    <span *ngFor="let service of transport.services; let last = last">
+                        <a [routerLink]="['/service', service?.id, 'view']">{{ service.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/transport', transport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

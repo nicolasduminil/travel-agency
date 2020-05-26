@@ -1,0 +1,13 @@
+export const enum AccomodationType {
+  HOTEL = 'HOTEL',
+
+  APPARTMENT = 'APPARTMENT',
+
+  TIMESHARE = 'TIMESHARE',
+
+  BED_AND_BREAKFAST = 'BED_AND_BREAKFAST',
+
+  HOSTEL = 'HOSTEL',
+
+  CAMPING = 'CAMPING',
+}

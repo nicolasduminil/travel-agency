@@ -1,0 +1,26 @@
+{
+  "travelAgencyApp": {
+    "deal": {
+      "home": {
+        "title": "Deals",
+        "createLabel": "Creeare o nouă entitate Deal",
+        "createOrEditLabel": "Creeare sau editare Deal",
+        "notFound": "No Deals found"
+      },
+      "created": "A fost creată o nouă entitate Deal cu identificatorul {{ param }}",
+      "updated": "Deal cu identificatorul {{ param }} a fost actualizată",
+      "deleted": "Deal cu identificatorul {{ param }} a fost ștearsă",
+      "delete": {
+        "question": "Sunteți sigur că doriți să ștergeți Deal {{ id }}?"
+      },
+      "detail": {
+        "title": "Deal"
+      },
+      "dealName": "Deal Name",
+      "dealBookDate": "Deal Book Date",
+      "agents": "Agents",
+      "customers": "Customers",
+      "services": "Services"
+    }
+  }
+}
