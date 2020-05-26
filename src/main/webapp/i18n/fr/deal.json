@@ -1,0 +1,26 @@
+{
+  "travelAgencyApp": {
+    "deal": {
+      "home": {
+        "title": "Deals",
+        "createLabel": "Créer un nouveau Deal",
+        "createOrEditLabel": "Créer ou éditer un Deal",
+        "notFound": "Aucun Deal trouvé"
+      },
+      "created": "Un nouveau Deal a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal"
+      },
+      "dealName": "Deal Name",
+      "dealBookDate": "Deal Book Date",
+      "agents": "Agents",
+      "customers": "Customers",
+      "services": "Services"
+    }
+  }
+}

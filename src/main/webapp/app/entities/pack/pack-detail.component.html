@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pack">
+            <h2><span jhiTranslate="travelAgencyApp.pack.detail.title">Pack</span> {{ pack.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="travelAgencyApp.pack.packageName">Package Name</span></dt>
+                <dd>
+                    <span>{{ pack.packageName }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.pack.packageDescription">Package Description</span></dt>
+                <dd>
+                    <span>{{ pack.packageDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.pack.packageDiscount">Package Discount</span></dt>
+                <dd>
+                    <span>{{ pack.packageDiscount }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.pack.packagePrice">Package Price</span></dt>
+                <dd>
+                    <span>{{ pack.packagePrice }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pack', pack.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

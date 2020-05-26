@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-service-heading" jhiTranslate="travelAgencyApp.service.home.createOrEditLabel">Create or edit a Service</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.service.serviceDescription" for="field_serviceDescription">Service Description</label>
+                    <input type="text" class="form-control" name="serviceDescription" id="field_serviceDescription"
+                           formControlName="serviceDescription"/>
+                    <div *ngIf="editForm.get('serviceDescription')!.invalid && (editForm.get('serviceDescription')!.dirty || editForm.get('serviceDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('serviceDescription')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.service.serviceStartDate" for="field_serviceStartDate">Service Start Date</label>
+                    <div class="input-group">
+                        <input id="field_serviceStartDate" type="text" class="form-control" name="serviceStartDate" ngbDatepicker #serviceStartDateDp="ngbDatepicker" formControlName="serviceStartDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="serviceStartDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('serviceStartDate')!.invalid && (editForm.get('serviceStartDate')!.dirty || editForm.get('serviceStartDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('serviceStartDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.service.serviceEndDate" for="field_serviceEndDate">Service End Date</label>
+                    <div class="input-group">
+                        <input id="field_serviceEndDate" type="text" class="form-control" name="serviceEndDate" ngbDatepicker #serviceEndDateDp="ngbDatepicker" formControlName="serviceEndDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="serviceEndDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('serviceEndDate')!.invalid && (editForm.get('serviceEndDate')!.dirty || editForm.get('serviceEndDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('serviceEndDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.service.servicePrice" for="field_servicePrice">Service Price</label>
+                    <input type="number" class="form-control" name="servicePrice" id="field_servicePrice"
+                           formControlName="servicePrice"/>
+                    <div *ngIf="editForm.get('servicePrice')!.invalid && (editForm.get('servicePrice')!.dirty || editForm.get('servicePrice')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('servicePrice')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('servicePrice')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="travelAgencyApp.service.deals" for="field_deals">Deals</label>
+                    <select class="form-control" id="field_deals" multiple name="deals" formControlName="deals">
+                        <option [ngValue]="getSelected(editForm.get('deals')!.value, dealOption)" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="travelAgencyApp.service.packages" for="field_packages">Packages</label>
+                    <select class="form-control" id="field_packages" multiple name="packages" formControlName="packages">
+                        <option [ngValue]="getSelected(editForm.get('packages')!.value, packOption)" *ngFor="let packOption of packs; trackBy: trackById">{{ packOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="travelAgencyApp.service.accomodations" for="field_accomodations">Accomodations</label>
+                    <select class="form-control" id="field_accomodations" multiple name="accomodations" formControlName="accomodations">
+                        <option [ngValue]="getSelected(editForm.get('accomodations')!.value, accomodationOption)" *ngFor="let accomodationOption of accomodations; trackBy: trackById">{{ accomodationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="travelAgencyApp.service.activities" for="field_activities">Activities</label>
+                    <select class="form-control" id="field_activities" multiple name="activities" formControlName="activities">
+                        <option [ngValue]="getSelected(editForm.get('activities')!.value, activityOption)" *ngFor="let activityOption of activities; trackBy: trackById">{{ activityOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

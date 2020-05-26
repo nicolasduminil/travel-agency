@@ -1,0 +1,55 @@
+{
+  "name": "Activity",
+  "fields": [
+    {
+      "fieldName": "activityDescription",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "activityType",
+      "fieldType": "ActivityType",
+      "fieldValues": "ADVENTURE,ATTRACTION,BOAT,GAME,HIKING,HORSE_RIDE,MUSEUM,RECREATIONAL,ROAD_TRIP,SELF_GUIDED,SWIMMING,WALKING_TOUR",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "activity",
+      "relationshipName": "location",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "contact",
+      "otherEntityRelationshipName": "activity",
+      "relationshipName": "contacts"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "service",
+      "otherEntityRelationshipName": "activities",
+      "relationshipName": "services",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200526124234",
+  "entityTableName": "activity",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

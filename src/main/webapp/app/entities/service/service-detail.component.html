@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="service">
+            <h2><span jhiTranslate="travelAgencyApp.service.detail.title">Service</span> {{ service.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="travelAgencyApp.service.serviceDescription">Service Description</span></dt>
+                <dd>
+                    <span>{{ service.serviceDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.serviceStartDate">Service Start Date</span></dt>
+                <dd>
+                    <span>{{ service.serviceStartDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.serviceEndDate">Service End Date</span></dt>
+                <dd>
+                    <span>{{ service.serviceEndDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.servicePrice">Service Price</span></dt>
+                <dd>
+                    <span>{{ service.servicePrice }}</span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.deals">Deals</span></dt>
+                <dd>
+                    <span *ngFor="let deals of service.deals; let last = last">
+                        <a [routerLink]="['/deal', deals?.id, 'view']">{{ deals.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.packages">Packages</span></dt>
+                <dd>
+                    <span *ngFor="let packages of service.packages; let last = last">
+                        <a [routerLink]="['/pack', packages?.id, 'view']">{{ packages.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.accomodations">Accomodations</span></dt>
+                <dd>
+                    <span *ngFor="let accomodations of service.accomodations; let last = last">
+                        <a [routerLink]="['/accomodation', accomodations?.id, 'view']">{{ accomodations.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="travelAgencyApp.service.activities">Activities</span></dt>
+                <dd>
+                    <span *ngFor="let activities of service.activities; let last = last">
+                        <a [routerLink]="['/activity', activities?.id, 'view']">{{ activities.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/service', service.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

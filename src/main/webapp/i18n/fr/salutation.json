@@ -1,0 +1,11 @@
+{
+  "travelAgencyApp": {
+    "Salutation": {
+      "null": "",
+      "MADAME": "MADAME",
+      "SIR": "SIR",
+      "DOCTOR": "DOCTOR",
+      "PROFESSOR": "PROFESSOR"
+    }
+  }
+}

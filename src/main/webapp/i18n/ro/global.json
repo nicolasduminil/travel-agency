@@ -10,6 +10,15 @@
         "bankAccount": "ContBancar",
         "label": "Etichetă",
         "operation": "Operație",
+        "accomodation": "Accomodation",
+        "activity": "Activity",
+        "contact": "Contact",
+        "customer": "Customer",
+        "location": "Location",
+        "service": "Service",
+        "deal": "Deal",
+        "pack": "Pack",
+        "transport": "Transport",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

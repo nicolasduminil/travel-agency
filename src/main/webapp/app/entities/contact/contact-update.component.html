@@ -1,0 +1,168 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-contact-heading" jhiTranslate="travelAgencyApp.contact.home.createOrEditLabel">Create or edit a Contact</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactName" for="field_contactName">Contact Name</label>
+                    <input type="text" class="form-control" name="contactName" id="field_contactName"
+                           formControlName="contactName"/>
+                    <div *ngIf="editForm.get('contactName')!.invalid && (editForm.get('contactName')!.dirty || editForm.get('contactName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactFirstName" for="field_contactFirstName">Contact First Name</label>
+                    <input type="text" class="form-control" name="contactFirstName" id="field_contactFirstName"
+                           formControlName="contactFirstName"/>
+                    <div *ngIf="editForm.get('contactFirstName')!.invalid && (editForm.get('contactFirstName')!.dirty || editForm.get('contactFirstName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactFirstName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactLastName" for="field_contactLastName">Contact Last Name</label>
+                    <input type="text" class="form-control" name="contactLastName" id="field_contactLastName"
+                           formControlName="contactLastName"/>
+                    <div *ngIf="editForm.get('contactLastName')!.invalid && (editForm.get('contactLastName')!.dirty || editForm.get('contactLastName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactLastName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactEmailAddress" for="field_contactEmailAddress">Contact Email Address</label>
+                    <input type="text" class="form-control" name="contactEmailAddress" id="field_contactEmailAddress"
+                           formControlName="contactEmailAddress"/>
+                    <div *ngIf="editForm.get('contactEmailAddress')!.invalid && (editForm.get('contactEmailAddress')!.dirty || editForm.get('contactEmailAddress')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactEmailAddress')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactEmailAddress')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Contact Email Address' }">
+                            This field should follow pattern for "Contact Email Address".
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactWebSite" for="field_contactWebSite">Contact Web Site</label>
+                    <input type="text" class="form-control" name="contactWebSite" id="field_contactWebSite"
+                           formControlName="contactWebSite"/>
+                    <div *ngIf="editForm.get('contactWebSite')!.invalid && (editForm.get('contactWebSite')!.dirty || editForm.get('contactWebSite')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactWebSite')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactSalutation" for="field_contactSalutation">Contact Salutation</label>
+                    <select class="form-control" name="contactSalutation" formControlName="contactSalutation" id="field_contactSalutation">
+                        <option value="MADAME">{{ 'travelAgencyApp.Salutation.MADAME' | translate }}</option>
+                        <option value="SIR">{{ 'travelAgencyApp.Salutation.SIR' | translate }}</option>
+                        <option value="DOCTOR">{{ 'travelAgencyApp.Salutation.DOCTOR' | translate }}</option>
+                        <option value="PROFESSOR">{{ 'travelAgencyApp.Salutation.PROFESSOR' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('contactSalutation')!.invalid && (editForm.get('contactSalutation')!.dirty || editForm.get('contactSalutation')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactSalutation')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactJobTitle" for="field_contactJobTitle">Contact Job Title</label>
+                    <input type="text" class="form-control" name="contactJobTitle" id="field_contactJobTitle"
+                           formControlName="contactJobTitle"/>
+                    <div *ngIf="editForm.get('contactJobTitle')!.invalid && (editForm.get('contactJobTitle')!.dirty || editForm.get('contactJobTitle')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactJobTitle')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactPhoneNumber" for="field_contactPhoneNumber">Contact Phone Number</label>
+                    <input type="text" class="form-control" name="contactPhoneNumber" id="field_contactPhoneNumber"
+                           formControlName="contactPhoneNumber"/>
+                    <div *ngIf="editForm.get('contactPhoneNumber')!.invalid && (editForm.get('contactPhoneNumber')!.dirty || editForm.get('contactPhoneNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contactPhoneNumber')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.contactFaxNumber" for="field_contactFaxNumber">Contact Fax Number</label>
+                    <input type="text" class="form-control" name="contactFaxNumber" id="field_contactFaxNumber"
+                           formControlName="contactFaxNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.address" for="field_address">Address</label>
+                    <select class="form-control" id="field_address" name="address" formControlName="address">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id === editForm.get('address')!.value?.id ? editForm.get('address')!.value : locationOption" *ngFor="let locationOption of addresses; trackBy: trackById">{{ locationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.activity" for="field_activity">Activity</label>
+                    <select class="form-control" id="field_activity" name="activity" formControlName="activity">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="activityOption.id === editForm.get('activity')!.value?.id ? editForm.get('activity')!.value : activityOption" *ngFor="let activityOption of activities; trackBy: trackById">{{ activityOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.deal" for="field_deal">Deal</label>
+                    <select class="form-control" id="field_deal" name="deal" formControlName="deal">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="dealOption.id === editForm.get('deal')!.value?.id ? editForm.get('deal')!.value : dealOption" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

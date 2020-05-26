@@ -1,0 +1,11 @@
+{
+  "travelAgencyApp": {
+    "TransportType": {
+      "null": "",
+      "RAILWAY": "RAILWAY",
+      "AIRWAY": "AIRWAY",
+      "ROADWAY": "ROADWAY",
+      "WATERWAY": "WATERWAY"
+    }
+  }
+}

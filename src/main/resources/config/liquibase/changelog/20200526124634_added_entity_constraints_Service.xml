@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Service.
+    -->
+    <changeSet id="20200526124634-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="service_deals"
+                                 constraintName="fk_service_deals_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service"/>
+
+        <addForeignKeyConstraint baseColumnNames="deals_id"
+                                 baseTableName="service_deals"
+                                 constraintName="fk_service_deals_deals_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deal"/>
+        
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="service_packages"
+                                 constraintName="service_packag_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service"/>
+
+        <addForeignKeyConstraint baseColumnNames="packages_id"
+                                 baseTableName="service_packages"
+                                 constraintName="service_packag_packages_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pack"/>
+        
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="service_accomodations"
+                                 constraintName="service_accomo_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service"/>
+
+        <addForeignKeyConstraint baseColumnNames="accomodations_id"
+                                 baseTableName="service_accomodations"
+                                 constraintName="service_accomo_accomodation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="accomodation"/>
+        
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="service_activities"
+                                 constraintName="service_activi_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service"/>
+
+        <addForeignKeyConstraint baseColumnNames="activities_id"
+                                 baseTableName="service_activities"
+                                 constraintName="service_activi_activities_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"/>
+        
+    </changeSet>
+</databaseChangeLog>

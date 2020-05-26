@@ -1,0 +1,26 @@
+{
+  "travelAgencyApp": {
+    "accomodation": {
+      "home": {
+        "title": "Accomodations",
+        "createLabel": "Creeare o nouă entitate Accomodation",
+        "createOrEditLabel": "Creeare sau editare Accomodation",
+        "notFound": "No Accomodations found"
+      },
+      "created": "A fost creată o nouă entitate Accomodation cu identificatorul {{ param }}",
+      "updated": "Accomodation cu identificatorul {{ param }} a fost actualizată",
+      "deleted": "Accomodation cu identificatorul {{ param }} a fost ștearsă",
+      "delete": {
+        "question": "Sunteți sigur că doriți să ștergeți Accomodation {{ id }}?"
+      },
+      "detail": {
+        "title": "Accomodation"
+      },
+      "accomodationName": "Accomodation Name",
+      "accomodationType": "Accomodation Type",
+      "accomodationClass": "Accomodation Class",
+      "location": "Location",
+      "services": "Services"
+    }
+  }
+}
