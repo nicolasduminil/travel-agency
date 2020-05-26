@@ -1,0 +1,152 @@
+entity Accomodation {
+  accomodationName String required,
+  accomodationType AccomodationType required,
+  accomodationClass AccomodationClass required
+}
+
+entity Activity {
+  activityDescription String required,
+  activityType ActivityType required,
+}
+
+entity Contact {
+  contactName String required,
+  contactFirstName String required,
+  contactLastName String required
+  contactEmailAddress String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+  contactWebSite String required,
+  contactSalutation Salutation required,
+  contactJobTitle String required,
+  contactPhoneNumber String required,
+  contactFaxNumber String
+}
+
+entity Customer {
+  customerName String required,
+  customerGender Gender,
+  customerBirthDate LocalDate
+}
+
+enum Gender {
+  M, F
+}
+
+enum AccomodationClass {
+  FIRST, BUSINESS, PREMIUM, ECONOMY
+}
+
+enum Salutation {
+  MADAME, SIR, DOCTOR, PROFESSOR
+}
+
+entity Location {
+  streetAddress String required,
+  streetNumber String required,
+  postalCode String required,
+  city String required,
+  stateProvince String required,
+  countryName String required
+}
+
+entity Service {
+  serviceDescription String required,
+  serviceStartDate LocalDate required,
+  serviceEndDate LocalDate required,
+  servicePrice BigDecimal required
+}
+
+entity Deal {
+  dealName String required,
+  dealBookDate LocalDate required
+}
+
+entity Pack {
+  packageName String required,
+  packageDescription String required,
+  packageDiscount BigDecimal,
+  packagePrice BigDecimal required
+}
+
+entity Transport {
+  transportType TransportType required,
+  transportName String required,
+  transportDescription String required
+}
+
+enum AccomodationType {
+  HOTEL, APPARTMENT, TIMESHARE, 
+  BED_AND_BREAKFAST, HOSTEL,
+  CAMPING
+}
+
+enum ActivityType {
+  ADVENTURE, ATTRACTION, BOAT,
+  GAME, HIKING, HORSE_RIDE,
+  MUSEUM, RECREATIONAL, ROAD_TRIP, 
+  SELF_GUIDED, SWIMMING, WALKING_TOUR
+}
+
+enum TransportType {
+  RAILWAY, AIRWAY, ROADWAY, WATERWAY
+}
+
+relationship OneToOne {
+  Accomodation {location} to Location {accomodation}
+}
+
+relationship OneToOne {
+  Contact {address} to Location {contact}
+}
+
+relationship OneToMany {
+  Activity {contacts} to Contact {activity}
+}
+
+relationship OneToOne {
+  Activity {location} to Location {activity}
+}
+
+relationship OneToMany {
+  Customer {locations} to Location {customer}
+}
+
+relationship OneToMany {
+  Customer {contacts} to Contact {customer}
+}
+
+relationship OneToMany {
+  Deal {agents} to Contact {deal}
+}
+
+relationship OneToMany {
+  Deal {customers} to Customer {deal}
+}
+
+relationship ManyToMany {
+  Service {deals} to Deal {services}
+}
+
+relationship ManyToMany {
+  Service {packages} to Pack {services}
+}
+
+relationship ManyToMany {
+  Service {accomodations} to Accomodation {services}
+}
+
+relationship ManyToMany {
+  Service {activities} to Activity {services}
+}
+
+relationship OneToOne {
+  Transport {to} to Location {transport}
+}
+
+relationship OneToOne {
+  Transport {from} to Location {transport}
+}
+
+relationship ManyToMany {
+  Transport {service} to Service {transport}
+}
+
