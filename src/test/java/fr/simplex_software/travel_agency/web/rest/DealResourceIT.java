@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Deal;
 import fr.simplex_software.travel_agency.repository.DealRepository;
+import fr.simplex_software.travel_agency.service.DealService;
+import fr.simplex_software.travel_agency.service.dto.DealDTO;
+import fr.simplex_software.travel_agency.service.mapper.DealMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +42,12 @@ public class DealResourceIT {
 
     @Autowired
     private DealRepository dealRepository;
+
+    @Autowired
+    private DealMapper dealMapper;
+
+    @Autowired
+    private DealService dealService;
 
     @Autowired
     private EntityManager em;
@@ -83,9 +92,10 @@ public class DealResourceIT {
     public void createDeal() throws Exception {
         int databaseSizeBeforeCreate = dealRepository.findAll().size();
         // Create the Deal
+        DealDTO dealDTO = dealMapper.toDto(deal);
         restDealMockMvc.perform(post("/api/deals")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(deal)))
+            .content(TestUtil.convertObjectToJsonBytes(dealDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Deal in the database
@@ -103,11 +113,12 @@ public class DealResourceIT {
 
         // Create the Deal with an existing ID
         deal.setId(1L);
+        DealDTO dealDTO = dealMapper.toDto(deal);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restDealMockMvc.perform(post("/api/deals")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(deal)))
+            .content(TestUtil.convertObjectToJsonBytes(dealDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Deal in the database
@@ -124,11 +135,12 @@ public class DealResourceIT {
         deal.setDealName(null);
 
         // Create the Deal, which fails.
+        DealDTO dealDTO = dealMapper.toDto(deal);
 
 
         restDealMockMvc.perform(post("/api/deals")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(deal)))
+            .content(TestUtil.convertObjectToJsonBytes(dealDTO)))
             .andExpect(status().isBadRequest());
 
         List<Deal> dealList = dealRepository.findAll();
@@ -143,11 +155,12 @@ public class DealResourceIT {
         deal.setDealBookDate(null);
 
         // Create the Deal, which fails.
+        DealDTO dealDTO = dealMapper.toDto(deal);
 
 
         restDealMockMvc.perform(post("/api/deals")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(deal)))
+            .content(TestUtil.convertObjectToJsonBytes(dealDTO)))
             .andExpect(status().isBadRequest());
 
         List<Deal> dealList = dealRepository.findAll();
@@ -206,10 +219,11 @@ public class DealResourceIT {
         updatedDeal
             .dealName(UPDATED_DEAL_NAME)
             .dealBookDate(UPDATED_DEAL_BOOK_DATE);
+        DealDTO dealDTO = dealMapper.toDto(updatedDeal);
 
         restDealMockMvc.perform(put("/api/deals")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedDeal)))
+            .content(TestUtil.convertObjectToJsonBytes(dealDTO)))
             .andExpect(status().isOk());
 
         // Validate the Deal in the database
@@ -225,10 +239,13 @@ public class DealResourceIT {
     public void updateNonExistingDeal() throws Exception {
         int databaseSizeBeforeUpdate = dealRepository.findAll().size();
 
+        // Create the Deal
+        DealDTO dealDTO = dealMapper.toDto(deal);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDealMockMvc.perform(put("/api/deals")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(deal)))
+            .content(TestUtil.convertObjectToJsonBytes(dealDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Deal in the database

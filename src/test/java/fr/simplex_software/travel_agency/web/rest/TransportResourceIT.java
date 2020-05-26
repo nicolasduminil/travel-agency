@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Transport;
 import fr.simplex_software.travel_agency.repository.TransportRepository;
+import fr.simplex_software.travel_agency.service.TransportService;
+import fr.simplex_software.travel_agency.service.dto.TransportDTO;
+import fr.simplex_software.travel_agency.service.mapper.TransportMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,6 +57,15 @@ public class TransportResourceIT {
     private TransportRepository transportRepositoryMock;
 
     @Autowired
+    private TransportMapper transportMapper;
+
+    @Mock
+    private TransportService transportServiceMock;
+
+    @Autowired
+    private TransportService transportService;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -98,9 +110,10 @@ public class TransportResourceIT {
     public void createTransport() throws Exception {
         int databaseSizeBeforeCreate = transportRepository.findAll().size();
         // Create the Transport
+        TransportDTO transportDTO = transportMapper.toDto(transport);
         restTransportMockMvc.perform(post("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Transport in the database
@@ -119,11 +132,12 @@ public class TransportResourceIT {
 
         // Create the Transport with an existing ID
         transport.setId(1L);
+        TransportDTO transportDTO = transportMapper.toDto(transport);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restTransportMockMvc.perform(post("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Transport in the database
@@ -140,11 +154,12 @@ public class TransportResourceIT {
         transport.setTransportType(null);
 
         // Create the Transport, which fails.
+        TransportDTO transportDTO = transportMapper.toDto(transport);
 
 
         restTransportMockMvc.perform(post("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isBadRequest());
 
         List<Transport> transportList = transportRepository.findAll();
@@ -159,11 +174,12 @@ public class TransportResourceIT {
         transport.setTransportName(null);
 
         // Create the Transport, which fails.
+        TransportDTO transportDTO = transportMapper.toDto(transport);
 
 
         restTransportMockMvc.perform(post("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isBadRequest());
 
         List<Transport> transportList = transportRepository.findAll();
@@ -178,11 +194,12 @@ public class TransportResourceIT {
         transport.setTransportDescription(null);
 
         // Create the Transport, which fails.
+        TransportDTO transportDTO = transportMapper.toDto(transport);
 
 
         restTransportMockMvc.perform(post("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isBadRequest());
 
         List<Transport> transportList = transportRepository.findAll();
@@ -207,22 +224,22 @@ public class TransportResourceIT {
     
     @SuppressWarnings({"unchecked"})
     public void getAllTransportsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(transportRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(transportServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restTransportMockMvc.perform(get("/api/transports?eagerload=true"))
             .andExpect(status().isOk());
 
-        verify(transportRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(transportServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({"unchecked"})
     public void getAllTransportsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(transportRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(transportServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restTransportMockMvc.perform(get("/api/transports?eagerload=true"))
             .andExpect(status().isOk());
 
-        verify(transportRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(transportServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -264,10 +281,11 @@ public class TransportResourceIT {
             .transportType(UPDATED_TRANSPORT_TYPE)
             .transportName(UPDATED_TRANSPORT_NAME)
             .transportDescription(UPDATED_TRANSPORT_DESCRIPTION);
+        TransportDTO transportDTO = transportMapper.toDto(updatedTransport);
 
         restTransportMockMvc.perform(put("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedTransport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isOk());
 
         // Validate the Transport in the database
@@ -284,10 +302,13 @@ public class TransportResourceIT {
     public void updateNonExistingTransport() throws Exception {
         int databaseSizeBeforeUpdate = transportRepository.findAll().size();
 
+        // Create the Transport
+        TransportDTO transportDTO = transportMapper.toDto(transport);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTransportMockMvc.perform(put("/api/transports")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transport)))
+            .content(TestUtil.convertObjectToJsonBytes(transportDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Transport in the database

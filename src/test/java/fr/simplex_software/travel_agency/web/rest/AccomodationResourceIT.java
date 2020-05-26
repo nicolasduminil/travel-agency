@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Accomodation;
 import fr.simplex_software.travel_agency.repository.AccomodationRepository;
+import fr.simplex_software.travel_agency.service.AccomodationService;
+import fr.simplex_software.travel_agency.service.dto.AccomodationDTO;
+import fr.simplex_software.travel_agency.service.mapper.AccomodationMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,6 +45,12 @@ public class AccomodationResourceIT {
 
     @Autowired
     private AccomodationRepository accomodationRepository;
+
+    @Autowired
+    private AccomodationMapper accomodationMapper;
+
+    @Autowired
+    private AccomodationService accomodationService;
 
     @Autowired
     private EntityManager em;
@@ -88,9 +97,10 @@ public class AccomodationResourceIT {
     public void createAccomodation() throws Exception {
         int databaseSizeBeforeCreate = accomodationRepository.findAll().size();
         // Create the Accomodation
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(accomodation);
         restAccomodationMockMvc.perform(post("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(accomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Accomodation in the database
@@ -109,11 +119,12 @@ public class AccomodationResourceIT {
 
         // Create the Accomodation with an existing ID
         accomodation.setId(1L);
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(accomodation);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAccomodationMockMvc.perform(post("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(accomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Accomodation in the database
@@ -130,11 +141,12 @@ public class AccomodationResourceIT {
         accomodation.setAccomodationName(null);
 
         // Create the Accomodation, which fails.
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(accomodation);
 
 
         restAccomodationMockMvc.perform(post("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(accomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Accomodation> accomodationList = accomodationRepository.findAll();
@@ -149,11 +161,12 @@ public class AccomodationResourceIT {
         accomodation.setAccomodationType(null);
 
         // Create the Accomodation, which fails.
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(accomodation);
 
 
         restAccomodationMockMvc.perform(post("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(accomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Accomodation> accomodationList = accomodationRepository.findAll();
@@ -168,11 +181,12 @@ public class AccomodationResourceIT {
         accomodation.setAccomodationClass(null);
 
         // Create the Accomodation, which fails.
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(accomodation);
 
 
         restAccomodationMockMvc.perform(post("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(accomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isBadRequest());
 
         List<Accomodation> accomodationList = accomodationRepository.findAll();
@@ -234,10 +248,11 @@ public class AccomodationResourceIT {
             .accomodationName(UPDATED_ACCOMODATION_NAME)
             .accomodationType(UPDATED_ACCOMODATION_TYPE)
             .accomodationClass(UPDATED_ACCOMODATION_CLASS);
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(updatedAccomodation);
 
         restAccomodationMockMvc.perform(put("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedAccomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isOk());
 
         // Validate the Accomodation in the database
@@ -254,10 +269,13 @@ public class AccomodationResourceIT {
     public void updateNonExistingAccomodation() throws Exception {
         int databaseSizeBeforeUpdate = accomodationRepository.findAll().size();
 
+        // Create the Accomodation
+        AccomodationDTO accomodationDTO = accomodationMapper.toDto(accomodation);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAccomodationMockMvc.perform(put("/api/accomodations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(accomodation)))
+            .content(TestUtil.convertObjectToJsonBytes(accomodationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Accomodation in the database

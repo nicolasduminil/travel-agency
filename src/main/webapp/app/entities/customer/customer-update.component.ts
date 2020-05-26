@@ -24,7 +24,7 @@ export class CustomerUpdateComponent implements OnInit {
     customerName: [null, [Validators.required]],
     customerGender: [],
     customerBirthDate: [],
-    deal: [],
+    dealId: [],
   });
 
   constructor(
@@ -48,7 +48,7 @@ export class CustomerUpdateComponent implements OnInit {
       customerName: customer.customerName,
       customerGender: customer.customerGender,
       customerBirthDate: customer.customerBirthDate,
-      deal: customer.deal,
+      dealId: customer.dealId,
     });
   }
 
@@ -73,7 +73,7 @@ export class CustomerUpdateComponent implements OnInit {
       customerName: this.editForm.get(['customerName'])!.value,
       customerGender: this.editForm.get(['customerGender'])!.value,
       customerBirthDate: this.editForm.get(['customerBirthDate'])!.value,
-      deal: this.editForm.get(['deal'])!.value,
+      dealId: this.editForm.get(['dealId'])!.value,
     };
   }
 

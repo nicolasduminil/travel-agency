@@ -30,8 +30,8 @@ export class TransportUpdateComponent implements OnInit {
     transportType: [null, [Validators.required]],
     transportName: [null, [Validators.required]],
     transportDescription: [null, [Validators.required]],
-    to: [],
-    from: [],
+    toId: [],
+    fromId: [],
     services: [],
   });
 
@@ -48,18 +48,18 @@ export class TransportUpdateComponent implements OnInit {
       this.updateForm(transport);
 
       this.locationService
-        .query({ filter: 'transport-is-null' })
+        .query({ filter: 'transportto-is-null' })
         .pipe(
           map((res: HttpResponse<ILocation[]>) => {
             return res.body || [];
           })
         )
         .subscribe((resBody: ILocation[]) => {
-          if (!transport.to || !transport.to.id) {
+          if (!transport.toId) {
             this.tos = resBody;
           } else {
             this.locationService
-              .find(transport.to.id)
+              .find(transport.toId)
               .pipe(
                 map((subRes: HttpResponse<ILocation>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -70,18 +70,18 @@ export class TransportUpdateComponent implements OnInit {
         });
 
       this.locationService
-        .query({ filter: 'transport-is-null' })
+        .query({ filter: 'transportfrom-is-null' })
         .pipe(
           map((res: HttpResponse<ILocation[]>) => {
             return res.body || [];
           })
         )
         .subscribe((resBody: ILocation[]) => {
-          if (!transport.from || !transport.from.id) {
+          if (!transport.fromId) {
             this.froms = resBody;
           } else {
             this.locationService
-              .find(transport.from.id)
+              .find(transport.fromId)
               .pipe(
                 map((subRes: HttpResponse<ILocation>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -101,8 +101,8 @@ export class TransportUpdateComponent implements OnInit {
       transportType: transport.transportType,
       transportName: transport.transportName,
       transportDescription: transport.transportDescription,
-      to: transport.to,
-      from: transport.from,
+      toId: transport.toId,
+      fromId: transport.fromId,
       services: transport.services,
     });
   }
@@ -128,8 +128,8 @@ export class TransportUpdateComponent implements OnInit {
       transportType: this.editForm.get(['transportType'])!.value,
       transportName: this.editForm.get(['transportName'])!.value,
       transportDescription: this.editForm.get(['transportDescription'])!.value,
-      to: this.editForm.get(['to'])!.value,
-      from: this.editForm.get(['from'])!.value,
+      toId: this.editForm.get(['toId'])!.value,
+      fromId: this.editForm.get(['fromId'])!.value,
       services: this.editForm.get(['services'])!.value,
     };
   }

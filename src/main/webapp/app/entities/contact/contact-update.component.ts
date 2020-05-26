@@ -41,10 +41,10 @@ export class ContactUpdateComponent implements OnInit {
     contactJobTitle: [null, [Validators.required]],
     contactPhoneNumber: [null, [Validators.required]],
     contactFaxNumber: [],
-    address: [],
-    activity: [],
-    customer: [],
-    deal: [],
+    addressId: [],
+    activityId: [],
+    customerId: [],
+    dealId: [],
   });
 
   constructor(
@@ -69,11 +69,11 @@ export class ContactUpdateComponent implements OnInit {
           })
         )
         .subscribe((resBody: ILocation[]) => {
-          if (!contact.address || !contact.address.id) {
+          if (!contact.addressId) {
             this.addresses = resBody;
           } else {
             this.locationService
-              .find(contact.address.id)
+              .find(contact.addressId)
               .pipe(
                 map((subRes: HttpResponse<ILocation>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -103,10 +103,10 @@ export class ContactUpdateComponent implements OnInit {
       contactJobTitle: contact.contactJobTitle,
       contactPhoneNumber: contact.contactPhoneNumber,
       contactFaxNumber: contact.contactFaxNumber,
-      address: contact.address,
-      activity: contact.activity,
-      customer: contact.customer,
-      deal: contact.deal,
+      addressId: contact.addressId,
+      activityId: contact.activityId,
+      customerId: contact.customerId,
+      dealId: contact.dealId,
     });
   }
 
@@ -137,10 +137,10 @@ export class ContactUpdateComponent implements OnInit {
       contactJobTitle: this.editForm.get(['contactJobTitle'])!.value,
       contactPhoneNumber: this.editForm.get(['contactPhoneNumber'])!.value,
       contactFaxNumber: this.editForm.get(['contactFaxNumber'])!.value,
-      address: this.editForm.get(['address'])!.value,
-      activity: this.editForm.get(['activity'])!.value,
-      customer: this.editForm.get(['customer'])!.value,
-      deal: this.editForm.get(['deal'])!.value,
+      addressId: this.editForm.get(['addressId'])!.value,
+      activityId: this.editForm.get(['activityId'])!.value,
+      customerId: this.editForm.get(['customerId'])!.value,
+      dealId: this.editForm.get(['dealId'])!.value,
     };
   }
 

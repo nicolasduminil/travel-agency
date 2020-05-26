@@ -5,30 +5,24 @@
       "fieldName": "transportType",
       "fieldType": "TransportType",
       "fieldValues": "RAILWAY,AIRWAY,ROADWAY,WATERWAY",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "transportName",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "transportDescription",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-one",
       "otherEntityName": "location",
-      "otherEntityRelationshipName": "transport",
+      "otherEntityRelationshipName": "transportTo",
       "relationshipName": "to",
       "otherEntityField": "id",
       "ownerSide": true
@@ -36,7 +30,7 @@
     {
       "relationshipType": "one-to-one",
       "otherEntityName": "location",
-      "otherEntityRelationshipName": "transport",
+      "otherEntityRelationshipName": "transportFrom",
       "relationshipName": "from",
       "otherEntityField": "id",
       "ownerSide": true
@@ -52,9 +46,9 @@
   ],
   "changelogDate": "20200526124934",
   "entityTableName": "transport",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "no",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

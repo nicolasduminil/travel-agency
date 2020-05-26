@@ -63,11 +63,11 @@ public class Location implements Serializable {
 
     @OneToOne(mappedBy = "to")
     @JsonIgnore
-    private Transport transport;
+    private Transport transportTo;
 
     @OneToOne(mappedBy = "from")
     @JsonIgnore
-    private Transport transport;
+    private Transport transportFrom;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "locations", allowSetters = true)
@@ -199,30 +199,30 @@ public class Location implements Serializable {
         this.activity = activity;
     }
 
-    public Transport getTransport() {
-        return transport;
+    public Transport getTransportTo() {
+        return transportTo;
     }
 
-    public Location transport(Transport transport) {
-        this.transport = transport;
+    public Location transportTo(Transport transport) {
+        this.transportTo = transport;
         return this;
     }
 
-    public void setTransport(Transport transport) {
-        this.transport = transport;
+    public void setTransportTo(Transport transport) {
+        this.transportTo = transport;
     }
 
-    public Transport getTransport() {
-        return transport;
+    public Transport getTransportFrom() {
+        return transportFrom;
     }
 
-    public Location transport(Transport transport) {
-        this.transport = transport;
+    public Location transportFrom(Transport transport) {
+        this.transportFrom = transport;
         return this;
     }
 
-    public void setTransport(Transport transport) {
-        this.transport = transport;
+    public void setTransportFrom(Transport transport) {
+        this.transportFrom = transport;
     }
 
     public Customer getCustomer() {

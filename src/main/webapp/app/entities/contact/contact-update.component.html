@@ -123,33 +123,33 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.address" for="field_address">Address</label>
-                    <select class="form-control" id="field_address" name="address" formControlName="address">
+                    <select class="form-control" id="field_address" name="address" formControlName="addressId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="locationOption.id === editForm.get('address')!.value?.id ? editForm.get('address')!.value : locationOption" *ngFor="let locationOption of addresses; trackBy: trackById">{{ locationOption.id }}</option>
+                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of addresses; trackBy: trackById">{{ locationOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.activity" for="field_activity">Activity</label>
-                    <select class="form-control" id="field_activity" name="activity" formControlName="activity">
+                    <select class="form-control" id="field_activity" name="activity" formControlName="activityId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="activityOption.id === editForm.get('activity')!.value?.id ? editForm.get('activity')!.value : activityOption" *ngFor="let activityOption of activities; trackBy: trackById">{{ activityOption.id }}</option>
+                        <option [ngValue]="activityOption.id" *ngFor="let activityOption of activities; trackBy: trackById">{{ activityOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.customer" for="field_customer">Customer</label>
-                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customerId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.id }}</option>
+                        <option [ngValue]="customerOption.id" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="travelAgencyApp.contact.deal" for="field_deal">Deal</label>
-                    <select class="form-control" id="field_deal" name="deal" formControlName="deal">
+                    <select class="form-control" id="field_deal" name="deal" formControlName="dealId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="dealOption.id === editForm.get('deal')!.value?.id ? editForm.get('deal')!.value : dealOption" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                        <option [ngValue]="dealOption.id" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
                     </select>
                 </div>
             </div>

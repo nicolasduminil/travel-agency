@@ -4,44 +4,32 @@
     {
       "fieldName": "streetAddress",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "streetNumber",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "postalCode",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "city",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "stateProvince",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "countryName",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -70,14 +58,14 @@
       "relationshipType": "one-to-one",
       "otherEntityName": "transport",
       "otherEntityRelationshipName": "to",
-      "relationshipName": "transport",
+      "relationshipName": "transportTo",
       "ownerSide": false
     },
     {
       "relationshipType": "one-to-one",
       "otherEntityName": "transport",
       "otherEntityRelationshipName": "from",
-      "relationshipName": "transport",
+      "relationshipName": "transportFrom",
       "ownerSide": false
     },
     {
@@ -90,9 +78,9 @@
   ],
   "changelogDate": "20200526124534",
   "entityTableName": "location",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "no",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

@@ -1,4 +1,3 @@
-import { ILocation } from 'app/shared/model/location.model';
 import { IService } from 'app/shared/model/service.model';
 import { TransportType } from 'app/shared/model/enumerations/transport-type.model';
 
@@ -7,8 +6,8 @@ export interface ITransport {
   transportType?: TransportType;
   transportName?: string;
   transportDescription?: string;
-  to?: ILocation;
-  from?: ILocation;
+  toId?: number;
+  fromId?: number;
   services?: IService[];
 }
 
@@ -18,8 +17,8 @@ export class Transport implements ITransport {
     public transportType?: TransportType,
     public transportName?: string,
     public transportDescription?: string,
-    public to?: ILocation,
-    public from?: ILocation,
+    public toId?: number,
+    public fromId?: number,
     public services?: IService[]
   ) {}
 }

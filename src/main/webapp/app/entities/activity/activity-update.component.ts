@@ -23,7 +23,7 @@ export class ActivityUpdateComponent implements OnInit {
     id: [],
     activityDescription: [null, [Validators.required]],
     activityType: [null, [Validators.required]],
-    location: [],
+    locationId: [],
   });
 
   constructor(
@@ -45,11 +45,11 @@ export class ActivityUpdateComponent implements OnInit {
           })
         )
         .subscribe((resBody: ILocation[]) => {
-          if (!activity.location || !activity.location.id) {
+          if (!activity.locationId) {
             this.locations = resBody;
           } else {
             this.locationService
-              .find(activity.location.id)
+              .find(activity.locationId)
               .pipe(
                 map((subRes: HttpResponse<ILocation>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -66,7 +66,7 @@ export class ActivityUpdateComponent implements OnInit {
       id: activity.id,
       activityDescription: activity.activityDescription,
       activityType: activity.activityType,
-      location: activity.location,
+      locationId: activity.locationId,
     });
   }
 
@@ -90,7 +90,7 @@ export class ActivityUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       activityDescription: this.editForm.get(['activityDescription'])!.value,
       activityType: this.editForm.get(['activityType'])!.value,
-      location: this.editForm.get(['location'])!.value,
+      locationId: this.editForm.get(['locationId'])!.value,
     };
   }
 

@@ -39,13 +39,13 @@
                     <td>{{ transport.transportName }}</td>
                     <td>{{ transport.transportDescription }}</td>
                     <td>
-                        <div *ngIf="transport.to">
-                            <a [routerLink]="['/location', transport.to?.id, 'view']" >{{ transport.to?.id }}</a>
+                        <div *ngIf="transport.toId">
+                            <a [routerLink]="['/location', transport.toId , 'view']" >{{ transport.toId }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="transport.from">
-                            <a [routerLink]="['/location', transport.from?.id, 'view']" >{{ transport.from?.id }}</a>
+                        <div *ngIf="transport.fromId">
+                            <a [routerLink]="['/location', transport.fromId , 'view']" >{{ transport.fromId }}</a>
                         </div>
                     </td>
                     <td>

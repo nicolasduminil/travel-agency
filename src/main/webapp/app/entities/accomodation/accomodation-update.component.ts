@@ -24,7 +24,7 @@ export class AccomodationUpdateComponent implements OnInit {
     accomodationName: [null, [Validators.required]],
     accomodationType: [null, [Validators.required]],
     accomodationClass: [null, [Validators.required]],
-    location: [],
+    locationId: [],
   });
 
   constructor(
@@ -46,11 +46,11 @@ export class AccomodationUpdateComponent implements OnInit {
           })
         )
         .subscribe((resBody: ILocation[]) => {
-          if (!accomodation.location || !accomodation.location.id) {
+          if (!accomodation.locationId) {
             this.locations = resBody;
           } else {
             this.locationService
-              .find(accomodation.location.id)
+              .find(accomodation.locationId)
               .pipe(
                 map((subRes: HttpResponse<ILocation>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -68,7 +68,7 @@ export class AccomodationUpdateComponent implements OnInit {
       accomodationName: accomodation.accomodationName,
       accomodationType: accomodation.accomodationType,
       accomodationClass: accomodation.accomodationClass,
-      location: accomodation.location,
+      locationId: accomodation.locationId,
     });
   }
 
@@ -93,7 +93,7 @@ export class AccomodationUpdateComponent implements OnInit {
       accomodationName: this.editForm.get(['accomodationName'])!.value,
       accomodationType: this.editForm.get(['accomodationType'])!.value,
       accomodationClass: this.editForm.get(['accomodationClass'])!.value,
-      location: this.editForm.get(['location'])!.value,
+      locationId: this.editForm.get(['locationId'])!.value,
     };
   }
 

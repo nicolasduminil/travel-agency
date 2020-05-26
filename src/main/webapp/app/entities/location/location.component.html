@@ -43,8 +43,8 @@
                     <td>{{ location.stateProvince }}</td>
                     <td>{{ location.countryName }}</td>
                     <td>
-                        <div *ngIf="location.customer">
-                            <a [routerLink]="['/customer', location.customer?.id, 'view']" >{{ location.customer?.id }}</a>
+                        <div *ngIf="location.customerId">
+                            <a [routerLink]="['/customer', location.customerId , 'view']" >{{ location.customerId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

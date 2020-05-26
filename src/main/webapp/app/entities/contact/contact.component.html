@@ -52,23 +52,23 @@
                     <td>{{ contact.contactPhoneNumber }}</td>
                     <td>{{ contact.contactFaxNumber }}</td>
                     <td>
-                        <div *ngIf="contact.address">
-                            <a [routerLink]="['/location', contact.address?.id, 'view']" >{{ contact.address?.id }}</a>
+                        <div *ngIf="contact.addressId">
+                            <a [routerLink]="['/location', contact.addressId , 'view']" >{{ contact.addressId }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="contact.activity">
-                            <a [routerLink]="['/activity', contact.activity?.id, 'view']" >{{ contact.activity?.id }}</a>
+                        <div *ngIf="contact.activityId">
+                            <a [routerLink]="['/activity', contact.activityId , 'view']" >{{ contact.activityId }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="contact.customer">
-                            <a [routerLink]="['/customer', contact.customer?.id, 'view']" >{{ contact.customer?.id }}</a>
+                        <div *ngIf="contact.customerId">
+                            <a [routerLink]="['/customer', contact.customerId , 'view']" >{{ contact.customerId }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="contact.deal">
-                            <a [routerLink]="['/deal', contact.deal?.id, 'view']" >{{ contact.deal?.id }}</a>
+                        <div *ngIf="contact.dealId">
+                            <a [routerLink]="['/deal', contact.dealId , 'view']" >{{ contact.dealId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

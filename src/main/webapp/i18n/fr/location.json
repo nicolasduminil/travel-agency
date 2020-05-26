@@ -25,8 +25,8 @@
       "accomodation": "Accomodation",
       "contact": "Contact",
       "activity": "Activity",
-      "transport": "Transport",
-      "transport": "Transport",
+      "transportTo": "Transport To",
+      "transportFrom": "Transport From",
       "customer": "Customer"
     }
   }

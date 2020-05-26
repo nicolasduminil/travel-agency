@@ -22,14 +22,14 @@
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.transport.to">To</span></dt>
                 <dd>
-                    <div *ngIf="transport.to">
-                        <a [routerLink]="['/location', transport.to?.id, 'view']">{{ transport.to?.id }}</a>
+                    <div *ngIf="transport.toId">
+                        <a [routerLink]="['/location', transport.toId, 'view']">{{ transport.toId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.transport.from">From</span></dt>
                 <dd>
-                    <div *ngIf="transport.from">
-                        <a [routerLink]="['/location', transport.from?.id, 'view']">{{ transport.from?.id }}</a>
+                    <div *ngIf="transport.fromId">
+                        <a [routerLink]="['/location', transport.fromId, 'view']">{{ transport.fromId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="travelAgencyApp.transport.service">Service</span></dt>

@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Service;
 import fr.simplex_software.travel_agency.repository.ServiceRepository;
+import fr.simplex_software.travel_agency.service.ServiceService;
+import fr.simplex_software.travel_agency.service.dto.ServiceDTO;
+import fr.simplex_software.travel_agency.service.mapper.ServiceMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,6 +62,15 @@ public class ServiceResourceIT {
     private ServiceRepository serviceRepositoryMock;
 
     @Autowired
+    private ServiceMapper serviceMapper;
+
+    @Mock
+    private ServiceService serviceServiceMock;
+
+    @Autowired
+    private ServiceService serviceService;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -105,9 +117,10 @@ public class ServiceResourceIT {
     public void createService() throws Exception {
         int databaseSizeBeforeCreate = serviceRepository.findAll().size();
         // Create the Service
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
         restServiceMockMvc.perform(post("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Service in the database
@@ -127,11 +140,12 @@ public class ServiceResourceIT {
 
         // Create the Service with an existing ID
         service.setId(1L);
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restServiceMockMvc.perform(post("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Service in the database
@@ -148,11 +162,12 @@ public class ServiceResourceIT {
         service.setServiceDescription(null);
 
         // Create the Service, which fails.
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
 
 
         restServiceMockMvc.perform(post("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isBadRequest());
 
         List<Service> serviceList = serviceRepository.findAll();
@@ -167,11 +182,12 @@ public class ServiceResourceIT {
         service.setServiceStartDate(null);
 
         // Create the Service, which fails.
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
 
 
         restServiceMockMvc.perform(post("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isBadRequest());
 
         List<Service> serviceList = serviceRepository.findAll();
@@ -186,11 +202,12 @@ public class ServiceResourceIT {
         service.setServiceEndDate(null);
 
         // Create the Service, which fails.
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
 
 
         restServiceMockMvc.perform(post("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isBadRequest());
 
         List<Service> serviceList = serviceRepository.findAll();
@@ -205,11 +222,12 @@ public class ServiceResourceIT {
         service.setServicePrice(null);
 
         // Create the Service, which fails.
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
 
 
         restServiceMockMvc.perform(post("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isBadRequest());
 
         List<Service> serviceList = serviceRepository.findAll();
@@ -235,22 +253,22 @@ public class ServiceResourceIT {
     
     @SuppressWarnings({"unchecked"})
     public void getAllServicesWithEagerRelationshipsIsEnabled() throws Exception {
-        when(serviceRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(serviceServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restServiceMockMvc.perform(get("/api/services?eagerload=true"))
             .andExpect(status().isOk());
 
-        verify(serviceRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(serviceServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({"unchecked"})
     public void getAllServicesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(serviceRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(serviceServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restServiceMockMvc.perform(get("/api/services?eagerload=true"))
             .andExpect(status().isOk());
 
-        verify(serviceRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(serviceServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -294,10 +312,11 @@ public class ServiceResourceIT {
             .serviceStartDate(UPDATED_SERVICE_START_DATE)
             .serviceEndDate(UPDATED_SERVICE_END_DATE)
             .servicePrice(UPDATED_SERVICE_PRICE);
+        ServiceDTO serviceDTO = serviceMapper.toDto(updatedService);
 
         restServiceMockMvc.perform(put("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedService)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isOk());
 
         // Validate the Service in the database
@@ -315,10 +334,13 @@ public class ServiceResourceIT {
     public void updateNonExistingService() throws Exception {
         int databaseSizeBeforeUpdate = serviceRepository.findAll().size();
 
+        // Create the Service
+        ServiceDTO serviceDTO = serviceMapper.toDto(service);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restServiceMockMvc.perform(put("/api/services")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(service)))
+            .content(TestUtil.convertObjectToJsonBytes(serviceDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Service in the database

@@ -1,9 +1,3 @@
-import { IAccomodation } from 'app/shared/model/accomodation.model';
-import { IContact } from 'app/shared/model/contact.model';
-import { IActivity } from 'app/shared/model/activity.model';
-import { ITransport } from 'app/shared/model/transport.model';
-import { ICustomer } from 'app/shared/model/customer.model';
-
 export interface ILocation {
   id?: number;
   streetAddress?: string;
@@ -12,12 +6,12 @@ export interface ILocation {
   city?: string;
   stateProvince?: string;
   countryName?: string;
-  accomodation?: IAccomodation;
-  contact?: IContact;
-  activity?: IActivity;
-  transport?: ITransport;
-  transport?: ITransport;
-  customer?: ICustomer;
+  accomodationId?: number;
+  contactId?: number;
+  activityId?: number;
+  transportToId?: number;
+  transportFromId?: number;
+  customerId?: number;
 }
 
 export class Location implements ILocation {
@@ -29,11 +23,11 @@ export class Location implements ILocation {
     public city?: string,
     public stateProvince?: string,
     public countryName?: string,
-    public accomodation?: IAccomodation,
-    public contact?: IContact,
-    public activity?: IActivity,
-    public transport?: ITransport,
-    public transport?: ITransport,
-    public customer?: ICustomer
+    public accomodationId?: number,
+    public contactId?: number,
+    public activityId?: number,
+    public transportToId?: number,
+    public transportFromId?: number,
+    public customerId?: number
   ) {}
 }

@@ -3,6 +3,9 @@ package fr.simplex_software.travel_agency.web.rest;
 import fr.simplex_software.travel_agency.TravelAgencyApp;
 import fr.simplex_software.travel_agency.domain.Pack;
 import fr.simplex_software.travel_agency.repository.PackRepository;
+import fr.simplex_software.travel_agency.service.PackService;
+import fr.simplex_software.travel_agency.service.dto.PackDTO;
+import fr.simplex_software.travel_agency.service.mapper.PackMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +47,12 @@ public class PackResourceIT {
 
     @Autowired
     private PackRepository packRepository;
+
+    @Autowired
+    private PackMapper packMapper;
+
+    @Autowired
+    private PackService packService;
 
     @Autowired
     private EntityManager em;
@@ -92,9 +101,10 @@ public class PackResourceIT {
     public void createPack() throws Exception {
         int databaseSizeBeforeCreate = packRepository.findAll().size();
         // Create the Pack
+        PackDTO packDTO = packMapper.toDto(pack);
         restPackMockMvc.perform(post("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(pack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Pack in the database
@@ -114,11 +124,12 @@ public class PackResourceIT {
 
         // Create the Pack with an existing ID
         pack.setId(1L);
+        PackDTO packDTO = packMapper.toDto(pack);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restPackMockMvc.perform(post("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(pack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Pack in the database
@@ -135,11 +146,12 @@ public class PackResourceIT {
         pack.setPackageName(null);
 
         // Create the Pack, which fails.
+        PackDTO packDTO = packMapper.toDto(pack);
 
 
         restPackMockMvc.perform(post("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(pack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isBadRequest());
 
         List<Pack> packList = packRepository.findAll();
@@ -154,11 +166,12 @@ public class PackResourceIT {
         pack.setPackageDescription(null);
 
         // Create the Pack, which fails.
+        PackDTO packDTO = packMapper.toDto(pack);
 
 
         restPackMockMvc.perform(post("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(pack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isBadRequest());
 
         List<Pack> packList = packRepository.findAll();
@@ -173,11 +186,12 @@ public class PackResourceIT {
         pack.setPackagePrice(null);
 
         // Create the Pack, which fails.
+        PackDTO packDTO = packMapper.toDto(pack);
 
 
         restPackMockMvc.perform(post("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(pack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isBadRequest());
 
         List<Pack> packList = packRepository.findAll();
@@ -242,10 +256,11 @@ public class PackResourceIT {
             .packageDescription(UPDATED_PACKAGE_DESCRIPTION)
             .packageDiscount(UPDATED_PACKAGE_DISCOUNT)
             .packagePrice(UPDATED_PACKAGE_PRICE);
+        PackDTO packDTO = packMapper.toDto(updatedPack);
 
         restPackMockMvc.perform(put("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedPack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isOk());
 
         // Validate the Pack in the database
@@ -263,10 +278,13 @@ public class PackResourceIT {
     public void updateNonExistingPack() throws Exception {
         int databaseSizeBeforeUpdate = packRepository.findAll().size();
 
+        // Create the Pack
+        PackDTO packDTO = packMapper.toDto(pack);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPackMockMvc.perform(put("/api/packs")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(pack)))
+            .content(TestUtil.convertObjectToJsonBytes(packDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Pack in the database
