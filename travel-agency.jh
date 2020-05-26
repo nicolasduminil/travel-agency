@@ -1,14 +1,17 @@
+@dto(mapstruct)
 entity Accomodation {
   accomodationName String required,
   accomodationType AccomodationType required,
   accomodationClass AccomodationClass required
 }
 
+@dto(mapstruct)
 entity Activity {
   activityDescription String required,
   activityType ActivityType required,
 }
 
+@dto(mapstruct)
 entity Contact {
   contactName String required,
   contactFirstName String required,
@@ -21,24 +24,14 @@ entity Contact {
   contactFaxNumber String
 }
 
+@dto(mapstruct)
 entity Customer {
   customerName String required,
   customerGender Gender,
   customerBirthDate LocalDate
 }
 
-enum Gender {
-  M, F
-}
-
-enum AccomodationClass {
-  FIRST, BUSINESS, PREMIUM, ECONOMY
-}
-
-enum Salutation {
-  MADAME, SIR, DOCTOR, PROFESSOR
-}
-
+@dto(mapstruct)
 entity Location {
   streetAddress String required,
   streetNumber String required,
@@ -48,6 +41,7 @@ entity Location {
   countryName String required
 }
 
+@dto(mapstruct)
 entity Service {
   serviceDescription String required,
   serviceStartDate LocalDate required,
@@ -55,11 +49,13 @@ entity Service {
   servicePrice BigDecimal required
 }
 
+@dto(mapstruct)
 entity Deal {
   dealName String required,
   dealBookDate LocalDate required
 }
 
+@dto(mapstruct)
 entity Pack {
   packageName String required,
   packageDescription String required,
@@ -67,6 +63,7 @@ entity Pack {
   packagePrice BigDecimal required
 }
 
+@dto(mapstruct)
 entity Transport {
   transportType TransportType required,
   transportName String required,
@@ -88,6 +85,18 @@ enum ActivityType {
 
 enum TransportType {
   RAILWAY, AIRWAY, ROADWAY, WATERWAY
+}
+
+enum Gender {
+  M, F
+}
+
+enum AccomodationClass {
+  FIRST, BUSINESS, PREMIUM, ECONOMY
+}
+
+enum Salutation {
+  MADAME, SIR, DOCTOR, PROFESSOR
 }
 
 relationship OneToOne {
@@ -139,11 +148,11 @@ relationship ManyToMany {
 }
 
 relationship OneToOne {
-  Transport {to} to Location {transport}
+  Transport {to} to Location {transportTo}
 }
 
 relationship OneToOne {
-  Transport {from} to Location {transport}
+  Transport {from} to Location {transportFrom}
 }
 
 relationship ManyToMany {
